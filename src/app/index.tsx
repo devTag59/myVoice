@@ -4,14 +4,14 @@ import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
   const [isSpeaking, setIspeaking] = useState(false);
-  const [text, setText] = useState(null);
+  const [text, setText] = useState("");
   const handleSeak = () => {
     if (isSpeaking) {
       speecth.stop();
       setIspeaking(false);
       return;
     }
-    if(!text){
+    if (!text) {
       alert("Digite algo para falar");
       return;
     }
@@ -54,7 +54,7 @@ export default function Index() {
           className="bg-blue-500 px-4 py-2 rounded-md mt-4 w-full h-14 shadow-black items-center justify-center"
         >
           <Text className="text-white font-bold">
-            {isSpeaking ? "Parar de falar" : "cluque para falar"}
+            {isSpeaking ? "Parar de falar" : "clique para falar"}
           </Text>
         </TouchableOpacity>
       </View>
