@@ -33,11 +33,14 @@ export default function Index() {
       >
         <View className="w-full flex-row items-center justify-between">
           <Text className="text-2xl font-bold text-blue-800">myVoice</Text>
-          <View className="w-fit p-2 h-10 bg-red-300 rounded-full">
+          <View className="w-fit p-2 h-10 bg-red-400 rounded-full">
             <Text className="text-center text-lg font-bold text-gray-500">
               EMERGENCIA
             </Text>
           </View>
+        </View>
+        <View className="w-full h-full bg-slate-500">
+
         </View>
         <View className="w-full h-72 my-4">
           <TextInput
