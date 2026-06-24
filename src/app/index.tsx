@@ -2,9 +2,12 @@ import * as speecth from "expo-speech";
 import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Alerts from "../components/alert";
 export default function Index() {
   const [isSpeaking, setIspeaking] = useState(false);
   const [text, setText] = useState("");
+  const [openModal, setModal]=useState(false)
+  const [TextModal, setTextModal]=useState("")
   const handleSeak = () => {
     if (isSpeaking) {
       speecth.stop();
@@ -12,7 +15,8 @@ export default function Index() {
       return;
     }
     if (!text) {
-      alert("Digite algo para falar");
+      setModal(true)
+      setTextModal("Por Favor digite alguma coisa para falar")
       return;
     }
     setIspeaking(true);
@@ -39,9 +43,7 @@ export default function Index() {
             </Text>
           </View>
         </View>
-        <View className="w-full h-full bg-slate-500">
-
-        </View>
+        <Alerts open={openModal} text={TextModal} close={()=>{setModal(false)}}/>
         <View className="w-full h-72 my-4">
           <TextInput
             placeholder="Digite algo para falar"
