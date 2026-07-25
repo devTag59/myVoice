@@ -1,6 +1,7 @@
 import * as speecth from "expo-speech";
 import { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {Ionicons, MaterialIcons, FontAwesome5} from "@expo/vector-icons"
+import { Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Alerts from "../components/alert";
 export default function Index() {
@@ -33,19 +34,28 @@ export default function Index() {
       <View
         className="flex-1
       bg-slate-200
-      flex flex-column items-center justify-between p-4"
+      flex flex-column justify-between p-4"
       >
-        <View className="w-full flex-row items-center justify-between">
+        <View className="flex w-full flex-row items-center justify-between pb-2">
           <Text className="text-2xl font-bold text-blue-800">myVoice</Text>
-          <View className="w-fit p-2 h-10 bg-red-400 rounded-full">
-            <Text className="text-center text-lg font-bold text-gray-500">
+          <View className="w-40 h-10 bg-slate-500 rounded-full flex flex-row justify-around items-center p-2">
+            <View>
+            <Text className="w-full text-sm font-bold text-white">
               EMERGENCIA
             </Text>
+            </View>
+            <View>
+              <Ionicons name="alert-circle" size={20} color="red" />
+            </View>
           </View>
         </View>
-        <Alerts open={openModal} text={TextModal} close={()=>{setModal(false)}}/>
-        <View className="w-full h-72 my-4">
+        <Alerts open={openModal} text={TextModal} close={()=>{setModal(false)}}/>\
+          <View
+           
+          >
+        <View className="h-40 w-full my-4">
           <TextInput
+          h-40
             placeholder="Digite algo para falar"
             className="border-none bg-white rounded-md flex-1 w-full text-start p-4 text-lg"
             value={text}
@@ -62,6 +72,7 @@ export default function Index() {
             {isSpeaking ? "Parar de falar" : "clique para falar"}
           </Text>
         </TouchableOpacity>
+      </View>
       </View>
     </SafeAreaView>
   );
