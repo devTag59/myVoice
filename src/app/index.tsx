@@ -1,14 +1,20 @@
+import { Ionicons } from "@expo/vector-icons";
 import * as speecth from "expo-speech";
 import { useState } from "react";
-import {Ionicons, MaterialIcons, FontAwesome5} from "@expo/vector-icons"
-import { Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView} from "react-native";
+import {
+  KeyboardAvoidingView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Alerts from "../components/alert";
 export default function Index() {
   const [isSpeaking, setIspeaking] = useState(false);
   const [text, setText] = useState("");
-  const [openModal, setModal]=useState(false)
-  const [TextModal, setTextModal]=useState("")
+  const [openModal, setModal] = useState(false);
+  const [TextModal, setTextModal] = useState("");
   const handleSeak = () => {
     if (isSpeaking) {
       speecth.stop();
@@ -16,8 +22,8 @@ export default function Index() {
       return;
     }
     if (!text) {
-      setModal(true)
-      setTextModal("Por Favor digite alguma coisa para falar")
+      setModal(true);
+      setTextModal("Por Favor digite alguma coisa para falar");
       return;
     }
     setIspeaking(true);
@@ -30,32 +36,31 @@ export default function Index() {
     });
   };
   return (
-    <SafeAreaView className="flex-1">
-      <View
-        className="flex-1
-      bg-slate-200
-      flex flex-column justify-between p-4"
-      >
-        <View className="flex w-full flex-row items-center justify-between pb-2">
-          <Text className="text-2xl font-bold text-blue-800">myVoice</Text>
-          <View className="w-40 h-10 bg-slate-500 rounded-full flex flex-row justify-around items-center p-2">
-            <View>
+    <SafeAreaView className="flex-1 bg-slate-200 p-4 flex flex-col">
+      <View className="flex w-full flex-row items-center justify-between pb-2">
+        <Text className="text-2xl font-bold text-blue-800">myVoice</Text>
+        <View className="w-40 h-10 bg-slate-500 rounded-full flex flex-row justify-around items-center p-2">
+          <View>
             <Text className="w-full text-sm font-bold text-white">
               EMERGENCIA
             </Text>
-            </View>
-            <View>
-              <Ionicons name="alert-circle" size={20} color="red" />
-            </View>
+          </View>
+          <View>
+            <Ionicons name="alert-circle" size={20} color="red" />
           </View>
         </View>
-        <Alerts open={openModal} text={TextModal} close={()=>{setModal(false)}}/>\
-          <View
-           
-          >
+      </View>
+      <Alerts
+        open={openModal}
+        text={TextModal}
+        close={() => {
+          setModal(false);
+        }}
+      />
+      <KeyboardAvoidingView behavior="padding" className="flex-1 flex flex-col justify-end pb-2" keyboardVerticalOffset={10}>
         <View className="h-40 w-full my-4">
           <TextInput
-          h-40
+            h-40
             placeholder="Digite algo para falar"
             className="border-none bg-white rounded-md flex-1 w-full text-start p-4 text-lg"
             value={text}
@@ -64,16 +69,35 @@ export default function Index() {
             textAlignVertical="top"
           />
         </View>
-        <TouchableOpacity
-          onPress={handleSeak}
-          className="bg-blue-500 px-4 py-2 rounded-md mt-4 w-full h-14 shadow-black items-center justify-center"
-        >
-          <Text className="text-white font-bold">
-            {isSpeaking ? "Parar de falar" : "clique para falar"}
+        <View className="w-full flex flex-row justify-between items-center">
+          <TouchableOpacity
+            onPress={handleSeak}
+            className="bg-blue-500 px-4 py-2 rounded-md mt-4 min-w-64 h-14 shadow-black items-center justify-center"
+          > 
+            <Text className="text-white font-bold">
+              {isSpeaking ? "Parar de falar" : "clique para falar"}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setText("");
+            }}
+            className="bg-gray-500 px-4 py-2 rounded-md mt-4 ml-2 min-w-fit h-14 shadow-black flex-row gap-1 items-center justify-center"
+          >
+            <Text className="text-white font-bold">Limpar</Text>
+            <View>
+            <Ionicons name="arrow-undo-outline" size={20} color="white" />
+          </View>
+          </TouchableOpacity>
+        </View>
+        <View className="flex flex-row justify-center items-center mt-4">
+          <Text className="text-sm text-gray-500">
+            Desenvolvido por{" "}
+            <Text className="text-blue-500 font-bold">Eno</Text>
+            <Text className="text-green-500 font-italic">Bit</Text>
           </Text>
-        </TouchableOpacity>
-      </View>
-      </View>
+        </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
