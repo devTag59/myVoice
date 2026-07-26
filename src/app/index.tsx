@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as speecth from "expo-speech";
 import { useState } from "react";
+import * as Haptics from "expo-haptics";
 import {
   KeyboardAvoidingView,
   Text,
@@ -10,6 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Alerts from "../components/alert";
+import Sugest from "../components/sugest";
 export default function Index() {
   const [isSpeaking, setIspeaking] = useState(false);
   const [text, setText] = useState("");
@@ -40,13 +42,13 @@ export default function Index() {
       <View className="flex w-full flex-row items-center justify-between pb-2">
         <Text className="text-2xl font-bold text-blue-800">myVoice</Text>
         <View className="w-40 h-10 bg-slate-500 rounded-full flex flex-row justify-around items-center p-2">
-          <View>
-            <Text className="w-full text-sm font-bold text-white">
-              EMERGENCIA
+          <View className="flex flex-row gap-2 items-center">
+            <Text className="text-sm font-bold text-white" onPress={() => {setModal(true); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success); setTextModal("Modo Claro")}}>
+              Light Mode
             </Text>
           </View>
           <View>
-            <Ionicons name="alert-circle" size={20} color="red" />
+            <Ionicons name="sunny" size={20} color="white" />
           </View>
         </View>
       </View>
@@ -57,7 +59,9 @@ export default function Index() {
           setModal(false);
         }}
       />
+      
       <KeyboardAvoidingView behavior="padding" className="flex-1 flex flex-col justify-end pb-2" keyboardVerticalOffset={10}>
+        <Sugest/>
         <View className="h-40 w-full my-4">
           <TextInput
             h-40
