@@ -44,7 +44,7 @@ export default function Index() {
     <SafeAreaView className="flex-1 bg-slate-200 dark:bg-slate-900 p-4 flex flex-col">
       <StatusBar animated={true} style={colorScheme === "dark" ? "light" : "dark"} />
       <View className="flex w-full flex-row items-center justify-between pb-2">
-        <Text className="text-2xl font-bold text-blue-800">myVoice</Text>
+        <Text className="text-2xl font-bold text-blue-800 dark:text-white">myVoice</Text>
         <TouchableOpacity className="w-40 h-10 bg-slate-500 rounded-full flex flex-row justify-around items-center p-2"
         onPress={() =>{ Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success), toggleColorScheme()}}>
           <View className="flex flex-row gap-2 items-center">
@@ -53,7 +53,7 @@ export default function Index() {
             </Text>
           </View>
           <View>
-            <Ionicons name="sunny" size={20} color="white" />
+            <Ionicons name={colorScheme==="dark"?"sunny":"moon"} size={20} color="white" />
           </View>
         </TouchableOpacity>
       </View>
@@ -67,11 +67,12 @@ export default function Index() {
       
       <KeyboardAvoidingView behavior="padding" className="flex-1 flex flex-col justify-end pb-2" keyboardVerticalOffset={10}>
         <Sugest/>
-        <View className="h-40 w-full my-4">
+        <View className="h-40 w-full
+         my-4">
           <TextInput
             h-40
             placeholder="Digite algo para falar"
-            className="border-none bg-white rounded-md flex-1 w-full text-start p-4 text-lg"
+            className="border-none bg-white dark:placeholder:text-white dark:bg-gray-800 dark:text-white rounded-md flex-1 w-full text-start p-4 text-lg"
             value={text}
             onChangeText={setText}
             multiline={true}

@@ -12,9 +12,9 @@ export default function Sugest() {
             <FlatList
             data={dados}
             renderItem={({ item }) => (
-                <View className="flex flex-row justify-between items-center p-4 bg-gray-50 rounded-full mb-2">
-                    <Text className="font-bold">{item.nome}</Text>
-                    <Text className="text-gray-500 font-italic">{item.idade}</Text>
+                <View className="flex flex-row justify-between items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-full mb-2">
+                    <Text className="font-bold text-gray-800 dark:text-white">{item.nome}</Text>
+                    <Text className="text-gray-500 font-italic dark:text-gray-400">{item.idade}</Text>
                 </View>
             )}
             />
