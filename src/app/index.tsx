@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as speecth from "expo-speech";
 import { useState } from "react";
+import {useColorScheme} from "nativewind";
 import * as Haptics from "expo-haptics";
 import {
   KeyboardAvoidingView,
@@ -12,7 +13,9 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import Alerts from "../components/alert";
 import Sugest from "../components/sugest";
+import { StatusBar } from "expo-status-bar";
 export default function Index() {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
   const [isSpeaking, setIspeaking] = useState(false);
   const [text, setText] = useState("");
   const [openModal, setModal] = useState(false);
@@ -38,19 +41,21 @@ export default function Index() {
     });
   };
   return (
-    <SafeAreaView className="flex-1 bg-slate-200 p-4 flex flex-col">
+    <SafeAreaView className="flex-1 bg-slate-200 dark:bg-slate-900 p-4 flex flex-col">
+      <StatusBar animated={true} style={colorScheme === "dark" ? "light" : "dark"} />
       <View className="flex w-full flex-row items-center justify-between pb-2">
         <Text className="text-2xl font-bold text-blue-800">myVoice</Text>
-        <View className="w-40 h-10 bg-slate-500 rounded-full flex flex-row justify-around items-center p-2">
+        <TouchableOpacity className="w-40 h-10 bg-slate-500 rounded-full flex flex-row justify-around items-center p-2"
+        onPress={() =>{ Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success), toggleColorScheme()}}>
           <View className="flex flex-row gap-2 items-center">
-            <Text className="text-sm font-bold text-white" onPress={() => {setModal(true); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success); setTextModal("Modo Claro")}}>
-              Light Mode
+            <Text className="text-sm font-bold text-white">
+              {colorScheme === "dark" ? "light" : "light"}
             </Text>
           </View>
           <View>
             <Ionicons name="sunny" size={20} color="white" />
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
       <Alerts
         open={openModal}
