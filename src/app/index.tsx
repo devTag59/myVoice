@@ -32,6 +32,7 @@ export default function Index() {
       return;
     }
     setIspeaking(true);
+    console.log("text", text);
     speecth.speak(text, {
       language: "pt-pt",
       rate: 0.8,
@@ -82,10 +83,11 @@ export default function Index() {
         <View className="w-full flex flex-row justify-between items-center">
           <TouchableOpacity
             onPress={handleSeak}
-            className="bg-blue-500 px-4 py-2 rounded-md mt-4 min-w-64 h-14 shadow-black items-center justify-center"
+            className="bg-blue-500 px-4 py-2 rounded-md mt-4 min-w-64 h-14 shadow-black items-center justify-center flex flex-row gap-1"
           > 
+          <Ionicons name={isSpeaking ?"stop-circle-outline":"play-circle-outline"} size={20} color="white" />
             <Text className="text-white font-bold">
-              {isSpeaking ? "Parar de falar" : "clique para falar"}
+              {isSpeaking ? "Parar de falar " : "Clique para falar"}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
